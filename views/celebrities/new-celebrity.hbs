@@ -1,0 +1,11 @@
+<h2></h2>
+<p class="error-message">{{errorMessage}}</p>
+<form action="" method="post">
+    <label for="name">Name</label>
+    <input id="name" type="text" name="name" class="{{#each name.class}}{{this}} {{/each}}" value="{{name.value}}">
+    <label for="occupation">Occupation</label>
+    <input id="occupation" type="text" name="occupation" class="{{#each occupation.class}}{{this}} {{/each}}" value="{{occupation.value}}">
+    <label for="catchPhrase">Catch Phrase</label>
+    <input id="catchPhrase" type="text" name="catchPhrase" class="{{#each catchPhrase.class}}{{this}} {{/each}}" value=""{{catchPhrase.value}}>
+    <button>Create Celebrity</button>
+</form>
