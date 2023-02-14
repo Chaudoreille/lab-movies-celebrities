@@ -38,4 +38,17 @@ router.post("/create", (req, res, next) => {
         });
 });
 
+router.get("/:id", (req, res, next) => {
+    console.log(req.params.id);
+    Movie.findById(req.params.id)
+        .populate("cast")
+        .then((movie) => {
+            res.locals.movie = movie;
+            res.render("movies/movie-details");
+        })
+        .catch((error) => {
+            next(error);
+        });
+});
+
 module.exports = router;

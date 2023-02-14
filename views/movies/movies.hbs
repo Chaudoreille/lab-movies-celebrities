@@ -1,16 +1,12 @@
+{{#with movie}}
 <h2>Movies</h2>
 <a href="/movies/create">Create Movie</a>
 <ul>
     {{#each movies}}
     <li>
-        <p class="title">{{title}}</p>
-        <p class="genre">{{genre}}</p>
-        <p class="plot">{{plot}}</p>
-        <ul class="cast">
-            {{#each cast}}
-                <li>{{name}}</li>
-            {{/each}}
-        </ul>
+        <a href="/movies/{{id}}">
+            <p class="title">{{title}}</p>
+        </a>
     </li>
     {{/each}}
 </ul>
