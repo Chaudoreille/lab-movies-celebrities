@@ -4,6 +4,17 @@ const Celebrity = require("../models/Celebrity.model");
 
 // all your routes here
 
+router.get("/", (req, res, next) => {
+    Celebrity.find()
+        .then((celebrities) => {
+            res.locals.celebrities = celebrities;
+            res.render("celebrities/celebrities");
+        })
+        .catch((error) => {
+            next(error);
+        });
+});
+
 router.get("/create", (req, res, next) => {
     res.render("celebrities/new-celebrity");
 });
