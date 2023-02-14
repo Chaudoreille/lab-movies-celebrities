@@ -11,6 +11,9 @@
         </li>
     {{/each}}   
 </ul>
+<form action="/movies/{{id}}/edit">
+    <input type="submit" value="Edit Movie">
+</form>
 <form action="/movies/{{id}}/delete">
     <input type="submit" value="Delete Movie">
 </form>

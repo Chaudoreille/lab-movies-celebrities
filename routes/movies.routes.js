@@ -38,6 +38,35 @@ router.post("/create", (req, res, next) => {
         });
 });
 
+router.get("/:id/edit", async (req, res, next) => {
+    try {
+        const celebrities = await Celebrity.find();
+        const movie = await Movie.findById(req.params.id);
+        res.locals.update = true;
+        res.locals.cast = celebrities;
+        res.locals.movie = movie;
+        res.locals.cast.forEach((celebrity) => {
+            for (let star of res.locals.movie.cast) {
+                if (star["_id"].equals(celebrity["_id"])) {
+                    celebrity.selected = true;
+                }
+            }
+        });
+        res.render("movies/new-movie");
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.post("/:id/edit", async (req, res, next) => {
+    try {
+        movie = await Movie.findByIdAndUpdate(req.params.id, req.body);
+        res.redirect(`/movies/${req.params.id}`);
+    } catch (error) {
+        next(error);
+    }
+});
+
 router.get("/:id/delete", async (req, res, next) => {
     try {
         await Movie.findByIdAndDelete(req.params.id);
