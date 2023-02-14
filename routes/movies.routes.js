@@ -38,8 +38,16 @@ router.post("/create", (req, res, next) => {
         });
 });
 
+router.get("/:id/delete", async (req, res, next) => {
+    try {
+        await Movie.findByIdAndDelete(req.params.id);
+        res.redirect("/movies");
+    } catch (error) {
+        next(error);
+    }
+});
+
 router.get("/:id", (req, res, next) => {
-    console.log(req.params.id);
     Movie.findById(req.params.id)
         .populate("cast")
         .then((movie) => {

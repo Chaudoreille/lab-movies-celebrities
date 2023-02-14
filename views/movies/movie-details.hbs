@@ -9,6 +9,9 @@
             <p class="occupation">{{occupation}}</p>
             <p class="catchPhrase">{{catchPhrase}}</p>
         </li>
-    {{/each}}
+    {{/each}}   
 </ul>
+<form action="/movies/{{id}}/delete">
+    <input type="submit" value="Delete Movie">
+</form>
 {{/with}}
