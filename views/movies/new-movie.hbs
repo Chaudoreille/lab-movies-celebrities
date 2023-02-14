@@ -1,0 +1,17 @@
+<h2></h2>
+<p class="error-message">{{errorMessage}}</p>
+<form action="" method="post">
+    <label for="title">Title</label>
+    <input id="title" type="text" name="title" class="{{#each title.class}}{{this}} {{/each}}" value="{{title.value}}">
+    <label for="genre">Genre</label>
+    <input id="genre" type="text" name="genre" class="{{#each genre.class}}{{this}} {{/each}}" value="{{genre.value}}">
+    <label for="plot">Plot</label>
+    <input id="plot" type="text" name="plot" class="{{#each plot.class}}{{this}} {{/each}}" value="{{plot.value}}">
+    <label for="cast">Catch Phrase</label>
+    <select name="cast" id="cast" class="{{#each cast.class}}{{this}} {{/each}}" multiple>
+        {{#each cast}}
+            <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select>
+    <button>Create Movie</button>
+</form>
