@@ -5,37 +5,31 @@ const Celebrity = require("../models/Celebrity.model");
 
 // all your routes here
 
-router.get("/", (req, res, next) => {
-    Movie.find()
-        .populate("cast")
-        .then((movies) => {
-            res.locals.movies = movies;
-            res.render("movies/movies");
-        })
-        .catch((error) => {
-            next(error);
-        });
+router.get("/", async (req, res, next) => {
+    try {
+        res.locals.movies = await Movie.find().populate("cast");
+        res.render("movies/movies");
+    } catch (error) {
+        next(error);
+    }
 });
 
-router.get("/create", (req, res, next) => {
-    Celebrity.find()
-        .then((celebrities) => {
-            res.locals.cast = celebrities;
-            res.render("movies/new-movie");
-        })
-        .catch((error) => {
-            next(error);
-        });
+router.get("/create", async (req, res, next) => {
+    try {
+        res.locals.cast = await Celebrity.find();
+        res.render("movies/new-movie");
+    } catch (error) {
+        next(error);
+    }
 });
 
-router.post("/create", (req, res, next) => {
-    Movie.create(req.body)
-        .then((movie) => {
-            res.redirect("/movies");
-        })
-        .catch((error) => {
-            next(error);
-        });
+router.post("/create", async (req, res, next) => {
+    try {
+        await Movie.create(req.body);
+        res.redirect("/movies");
+    } catch (error) {
+        next(error);
+    }
 });
 
 router.get("/:id/edit", async (req, res, next) => {
@@ -52,6 +46,7 @@ router.get("/:id/edit", async (req, res, next) => {
                 }
             }
         });
+
         res.render("movies/new-movie");
     } catch (error) {
         next(error);
@@ -76,16 +71,13 @@ router.get("/:id/delete", async (req, res, next) => {
     }
 });
 
-router.get("/:id", (req, res, next) => {
-    Movie.findById(req.params.id)
-        .populate("cast")
-        .then((movie) => {
-            res.locals.movie = movie;
-            res.render("movies/movie-details");
-        })
-        .catch((error) => {
-            next(error);
-        });
+router.get("/:id", async (req, res, next) => {
+    try {
+        res.locals.movie = await Movie.findById(req.params.id).populate("cast");
+        res.render("movies/movie-details");
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;
