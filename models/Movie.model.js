@@ -12,10 +12,12 @@ const movieSchema = new mongoose.Schema({
     plot: {
         type: String,
     },
-    cast: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: "Celebrity",
-    },
+    cast: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Celebrity",
+        },
+    ],
 });
 
 module.exports = mongoose.model("Movie", movieSchema);
