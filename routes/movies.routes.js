@@ -16,6 +16,7 @@ router.get("/", async (req, res, next) => {
 
 router.get("/create", async (req, res, next) => {
     try {
+        res.locals.title = "Create Movie";
         res.locals.cast = await Celebrity.find();
         res.render("movies/new-movie");
     } catch (error) {
@@ -34,9 +35,10 @@ router.post("/create", async (req, res, next) => {
 
 router.get("/:id/edit", async (req, res, next) => {
     try {
-        res.locals.update = true;
         res.locals.cast = await Celebrity.find();
         res.locals.movie = await Movie.findById(req.params.id);
+        res.locals.title = "Edit Movie: " + res.locals.movie.title;
+        res.locals.update = true;
 
         res.locals.cast.forEach((celebrity) => {
             for (let star of res.locals.movie.cast) {

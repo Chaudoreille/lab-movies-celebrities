@@ -1,5 +1,7 @@
-<h2></h2>
+<h2>{{title}}</h2>
+
 <p class="error-message">{{errorMessage}}</p>
+
 <form action="" method="post">
     <label for="title">Title</label>
     <input id="title" type="text" name="title" {{#with errors.name}}class="error"{{/with}} value="{{movie.title}}">
